@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        nav {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/add-language}">Add Language</a>
+        <a th:href="@{/admin/add-quiz}">Add Quiz</a>
+    </nav>
+
+    <h1>Admin Dashboard</h1>
+
+    <!-- Add Language Form -->
+    <!-- <h2>Add Category (Language)</h2>
+    <form th:action="@{/admin/add-language}" method="post">
+        <input type="text" name="name" placeholder="Language Name" required />
+        <button type="submit">Add Language</button>
+    </form>
+    <p th:if="${param.lang_success}" style="color:green;">Language added successfully!</p>
+
+    < Add Quiz Form 
+    <h2>Add Quiz</h2>
+    <form th:action="@{/admin/add-quiz}" method="post">
+        <input type="text" name="name" placeholder="Quiz Name" required />
+        <input type="text" name="level" placeholder="Level (e.g. Easy, Medium)" required />
+
+        <select name="languageId" required>
+            <option value="">Select Language</option>
+            <option th:each="lang : ${languages}" th:value="${lang.id}" th:text="${lang.name}"></option>
+        </select>
+
+        <button type="submit">Add Quiz</button>
+    </form>
+    <p th:if="${param.quiz_success}" style="color:green;">Quiz added successfully!</p> -->
+
+</body>
+</html>

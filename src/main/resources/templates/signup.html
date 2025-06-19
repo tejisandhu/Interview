@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Logdy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .signup-container {
+            background: url('https://i.pinimg.com/736x/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg') no-repeat center center;
+            background-size: cover;
+            border-top-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            width: 420px;
+            padding: 50px 40px;
+            color: white;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .signup-container h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .signup-container p {
+            margin-bottom: 25px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background-color: #ff0000;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .error {
+            color: yellow;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="signup-container">
+    <h1>Register</h1>
+
+    <form th:action="@{/signup}" th:object="${user}" method="post">
+
+        <label for="email">Email</label>
+        <input type="email" th:field="*{email}" placeholder="Email Address" required />
+
+        <label for="password">Password</label>
+        <input type="password" th:field="*{password}" placeholder="Password" required />
+
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+
+        <button type="submit" class="signup-btn">Register</button>
+
+        <div class="login-link">
+            Already have an account? <a th:href="@{/login}">Login here</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

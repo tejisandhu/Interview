@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" th:action="@{/admin/add-quiz}" method="post">
+    <input type="text" name="name" placeholder="Enter quiz name" required>
+<select name="level" required>
+    <option value="" disabled selected>Select difficulty level</option>
+    <option value="EASY">Easy</option>
+    <option value="MEDIUM">Medium</option>
+    <option value="HARD">Hard</option>
+</select>
+
+    <select name="languageId">
+        <option th:each="lang : ${languages}" th:value="${lang.id}" th:text="${lang.name}"></option>
+    </select>
+
+    <button type="submit">Add Quiz</button>
+</form>
+
+    
+</body>
+</html>
