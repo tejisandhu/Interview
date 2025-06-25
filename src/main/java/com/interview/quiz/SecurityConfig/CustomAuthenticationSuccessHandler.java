@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             response.sendRedirect("/admin/dashboard");
             System.out.println("SENDING TO ADMIN");
         } else if (userTypeId == 2L) {
-            response.sendRedirect("/user/dashboard");
+            response.sendRedirect("/user/user-dashboard");
         } else {
             response.sendRedirect("/access-denied");
 System.out.print("ERROR SENDING00");

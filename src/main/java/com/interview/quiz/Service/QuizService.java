@@ -28,4 +28,10 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() {
         return quizRepository.findAll();
     }
+    public Quiz findById(Long id) {
+        return quizRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Quiz not found with ID: " + id));
+    }
+
+    
 }

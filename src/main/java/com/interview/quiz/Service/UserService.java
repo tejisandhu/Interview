@@ -60,4 +60,5 @@ public class UserService {
     public Optional<UserType> getUserTypeByName(String typeName) {
         return userTypeRepository.findByUserTypeNameIgnoreCase(typeName);
     }
+    
 }

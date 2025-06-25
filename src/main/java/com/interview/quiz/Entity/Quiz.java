@@ -1,5 +1,7 @@
 package com.interview.quiz.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,6 +56,16 @@ public class Quiz {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Languages language;
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Question> questions;
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
 
     // Constructors
     public Quiz() {}

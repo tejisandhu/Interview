@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Question</title>
+</head>
+<body>
+    <h2>Add New Question</h2>
+
+<form th:action="@{/admin/add-question}"
+      method="post"
+      th:object="${questionForm}"> 
+          <!-- <input type="hidden" name="quizId" th:value="${quiz.id}" /> -->
+<input type="hidden" th:field="*{quiz.id}" />
+
+          <!-- match the model name -->
+        <label>Question:</label><br>
+<textarea th:field="*{question}" required></textarea>
+<div th:if="${#fields.hasErrors('question')}" class="error">
+    Question text is required
+</div>
+
+
+        <label>Option 1:</label>
+        <input type="text" th:field="*{option1}" required><br>
+
+        <label>Option 2:</label>
+        <input type="text" th:field="*{option2}" required><br>
+
+        <label>Option 3:</label>
+        <input type="text" th:field="*{option3}" required><br>
+
+        <label>Option 4:</label>
+        <input type="text" th:field="*{option4}" required><br>
+
+        <label>Correct Answer:</label>
+        <input type="text" th:field="*{answer}" required><br>
+
+        <label>Explanation:</label><br>
+        <textarea th:field="*{explanation}"></textarea><br><br>
+
+<!-- <label>Quiz:</label>
+<select th:field="*{quiz.id}" required>
+  <option value="" disabled>-- Select Quiz --</option>
+  <option th:each="q : ${quizzes}"
+          th:value="${q.id}"
+          th:text="${q.name}">
+  </option>
+</select>
+ -->
+        <label>Quiz:</label>
+        <input type="text" th:value="${quiz.name}" readonly class="form-control" /><br>
+
+        <button type="submit">Save Question</button>
+    </form>
+</body>
+</html>
+
