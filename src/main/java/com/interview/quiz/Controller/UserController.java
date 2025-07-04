@@ -1,16 +1,22 @@
 package com.interview.quiz.Controller;
 
+import com.interview.quiz.Entity.InterviewRoom;
+
 import com.interview.quiz.Entity.Languages;
 
 import com.interview.quiz.Entity.Question;
 import com.interview.quiz.Entity.Quiz;
 import com.interview.quiz.Entity.QuizHistory;
 import com.interview.quiz.Entity.User;
+import com.interview.quiz.Repository.InterviewRoomRepository;
 import com.interview.quiz.Repository.LanguagesRepository;
 import com.interview.quiz.Repository.QuizHistoryRepository;
 import com.interview.quiz.Repository.QuizRepository;
 import com.interview.quiz.Repository.UserRepository;
+import com.interview.quiz.Service.EmailService;
 import com.interview.quiz.Service.UserService;
+import com.interview.quiz.Entity.InterviewRoom;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,6 +43,11 @@ public class UserController {
     private QuizHistoryRepository quizHistoryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private InterviewRoomRepository roomRepo;
+    @Autowired
+    private EmailService emailService;
+
 
 
     
@@ -172,6 +183,33 @@ public class UserController {
 
         return "user-quiz-history"; // Create this Thymeleaf template
     }
+    @PostMapping("/user/create-room")
+    public String createRoom(@RequestParam("candidateEmail") String candidateEmail,
+                             Principal principal, Model model) {
+        // Either use by email (if principal name is email)
+        User recruiter = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Or use this if principal returns ID:
+        // Long userId = Long.parseLong(principal.getName());
+        // User recruiter = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        InterviewRoom room = new InterviewRoom();
+        room.setCreatedByUserId(recruiter.getId());
+        roomRepo.save(room);
+
+        String roomLink = "http://localhost:8080/user/join-room/" + room.getRoomId();
+        emailService.sendInvite(candidateEmail, recruiter.getName(), roomLink);
+
+        model.addAttribute("roomId", room.getRoomId());
+        return "room-created";
+    }
+    @GetMapping("/user/join-room/{roomId}")
+    public String joinRoom(@PathVariable String roomId, Model model) {
+        model.addAttribute("roomId", roomId);
+        return "interview"; // interview.html
+    }
+
 
 
 

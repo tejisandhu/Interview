@@ -32,7 +32,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/signup", "/login", "/css/**", "/js/**").permitAll()
+                .requestMatchers(
+                        "/interview",
+                        "/signal/**",   // SockJS endpoint
+                        "/app/**",      // STOMP send destinations
+                        "/topic/**",    // STOMP subscribe destinations
+"/signup", "/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/admin/**","/admin/dashboard").hasAuthority("Admin")
                 .requestMatchers("/user/**").hasAuthority("user")
                 .anyRequest().authenticated()

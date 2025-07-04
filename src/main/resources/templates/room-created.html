@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Room Created</title>
+</head>
+<body>
+    <h2>✅ Interview Room Created</h2>
+    <p>Share this link with candidate:</p>
+    <code th:text="@{'/user/join-room/' + ${roomId}}"></code>
+    <br><br>
+    <a th:href="@{'/user/join-room/' + ${roomId}}">Join Now</a>
+</body>
+</html>
